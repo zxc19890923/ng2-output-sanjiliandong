@@ -1,0 +1,79 @@
+<br/>
+<div class="container">
+  <alert type="info">
+    <i class="glyphicon glyphicon-info-sign"></i> 我的信息 <a href="javascript:;" class="pull-right"
+                                                          (click)="lgModal.show()">完善资料</a>
+  </alert>
+  <div *ngFor="let item of data">
+    <ul class="list-group" *ngIf="item.sex != null">
+      <li class="list-group-item">性别: {{item.sex}}</li>
+      <li class="list-group-item">年龄: {{item.age}}</li>
+      <li class="list-group-item">职务: {{item.position}}</li>
+      <li class="list-group-item">地址: {{item.address}}</li>
+      <li class="list-group-item">爱好: {{item.hobby}}</li>
+      <li class="list-group-item">省份: {{item.province}}</li>
+      <li class="list-group-item">市: {{item.city}}</li>
+      <li class="list-group-item">区县: {{item.country}}</li>
+      <li class="list-group-item">
+        备注:
+        <div innerHTML="{{item.remark}}">
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!--模态窗口-->
+  <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">完善个人信息</h4>
+          <button type="button" class="close pull-right" (click)="lgModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #userInfo="ngForm">
+            <div class="row">
+              <div class="col-sm-10 col-sm-offset-1">
+                <p>
+                  <input type="text" name="age" [(ngModel)]="age" class="form-control" placeholder="年龄"/>
+                </p>
+                <p>
+                  <select [(ngModel)]="sex" name="sex" class="form-control">
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                  </select>
+                </p>
+                <p>
+                  <input type="text" name="position" [(ngModel)]="position" class="form-control" placeholder="职位"/>
+                </p>
+                <p>
+                  <input type="text" name="address" [(ngModel)]="address" class="form-control" placeholder="地址"/>
+                </p>
+                <p>
+                  <input type="text" name="hobby" [(ngModel)]="hobby" class="form-control" placeholder="爱好"/>
+                </p>
+                <!--三级联动组件-->
+                <three-link (provinceOut)="recPro($event)"
+                            (cityOut)="recCity($event)"
+                            (countryOut)="recCou($event)"
+                ></three-link>
+                <p>
+                  <!-- 富文本编辑器 -->
+                  <quill-editor name="editorContent" [(ngModel)]="editorContent"
+                                [config]="editorConfig"
+                                (change)="onContentChanged($event)"></quill-editor>
+                </p>
+                <p>
+                  <button class="btn btn-info pull-right" (click)="editorHandel()">提交</button>
+                </p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

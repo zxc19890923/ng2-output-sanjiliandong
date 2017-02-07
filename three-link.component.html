@@ -1,0 +1,18 @@
+<p>
+  <select name="province" [(ngModel)]="province" class="form-control" (change)="provinceChange()">
+    <option value="-1">--请选择省份--</option>
+    <option *ngFor="let item of provinceData" value="{{item.ProID}}">{{item.name}}</option>
+  </select>
+</p>
+<p>
+  <select name="province" [(ngModel)]="city" class="form-control" (change)="cityChange()">
+    <option value="-1">--请选择市--</option>
+    <option *ngFor="let item of cityData" value="{{item.CityID}}">{{item.name}}</option>
+  </select>
+</p>
+<p>
+  <select name="province" [(ngModel)]="country" class="form-control" (change)="countryChange()">
+    <option value="-1">--请选择区县--</option>
+    <option *ngFor="let item of countryData" value="{{item.Id}}">{{item.name}}</option>
+  </select>
+</p>
